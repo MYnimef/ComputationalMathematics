@@ -100,8 +100,9 @@ def parallelepiped():
     h = random.randint(4, 20) * 5
     beginning = random.randint(4, 20)
     a = beginning * 5
-    d = random.randint(beginning, 30) * 5
-    print('Задание - Прямоугольный параллелепипед с высотой {} см, стороной основания {} см и диагональю основания {} см.'
+    d = random.randint(beginning + 2, 30) * 5
+    print('Задание - Прямоугольный параллелепипед с высотой {} см, стороной основания {} см и диагональю основания {} '
+          'см. '
           .format(h, a, d))
 
     sup = math.sqrt(d ** 2 - a ** 2)

@@ -2,6 +2,8 @@ import first
 import second
 
 if __name__ == '__main__':
+    print('\nПервое занятие\n')
+
     print('\n____________________\n')
     first.first_task()
     print('\n____________________\n')
@@ -15,3 +17,7 @@ if __name__ == '__main__':
     print('\n____________________\n')
     second.lagrange()
     print('\n____________________\n')
+    second.newton()
+    print('\n____________________\n')
+
+    print('\nТретье занятие\n')
