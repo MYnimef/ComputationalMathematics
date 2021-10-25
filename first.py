@@ -3,9 +3,8 @@ import random
 from sympy import *
 
 
-def first_task():
-    number = random.randint(int(1e4), int(1e5)) / pow(10, random.randint(1, 3))
-    epsilon = random.randint(1, 9) / pow(10, random.randint(0, 3))
+def first_task(number=random.randint(int(1e4), int(1e5)) / pow(10, random.randint(1, 3)),
+               epsilon=random.randint(1, 9) / pow(10, random.randint(0, 3))):
     print('Задание - Дано приближенное число {}, погрешность - {}. Найти число верных знаков.'
           .format(number, epsilon))
 
@@ -34,11 +33,12 @@ def second_task():
         cylinder()
 
 
-def trapeze():
-    beginning = random.randint(2, 8)
-    a = beginning * 5
-    b = random.randint(beginning + 2, 18) * 5
-    h = random.randint(2, 20) * 5
+def trapeze(a=random.randint(2, 18) * 5, b=random.randint(2, 18) * 5, h=random.randint(2, 20) * 5):
+    if a > b:
+        sup = a
+        a = b
+        b = sup
+
     print('Задание - Равнобедренная трапеция со сторонами основания, равными {} и {} см, и высотой, равной {} см.'
           .format(a, b, h))
 
@@ -56,9 +56,7 @@ def trapeze():
           .format(round(p, 3), round(abs_p, 3), round(rel_p, 3)))
 
 
-def pyramid():
-    a = random.randint(2, 30) * 5
-    h = random.randint(2, 20) * 5
+def pyramid(a=random.randint(2, 30) * 5, h=random.randint(2, 20) * 5):
     print('Задание - Правильная четырехугольная пирамида со стороной основания, равной {} см, и высотой, равной {} см.'
           .format(a, h))
 
@@ -76,9 +74,7 @@ def pyramid():
           .format(round(s, 3), round(abs_s, 3), round(rel_s, 3)))
 
 
-def cone():
-    h = random.randint(2, 10) * 5
-    r = random.randint(1, 10) * 5
+def cone(h=random.randint(2, 10) * 5, r=random.randint(1, 10) * 5):
     print('Задание - Конус с высотой, равной {} см, и радиусом, равным {} см.'
           .format(h, r))
 
@@ -96,11 +92,14 @@ def cone():
           .format(round(s, 3), round(abs_s, 3), round(rel_s, 3)))
 
 
-def parallelepiped():
-    h = random.randint(4, 20) * 5
-    beginning = random.randint(4, 20)
-    a = beginning * 5
-    d = random.randint(beginning + 2, 30) * 5
+def parallelepiped(h=random.randint(4, 20) * 5, a=random.randint(4, 30) * 5, d=random.randint(4, 30) * 5):
+    if a > d:
+        sup = a
+        a = d
+        d = sup
+    elif a == d:
+        d += 10
+
     print('Задание - Прямоугольный параллелепипед с высотой {} см, стороной основания {} см и диагональю основания {} '
           'см. '
           .format(h, a, d))
@@ -120,9 +119,7 @@ def parallelepiped():
           .format(round(s, 3), round(abs_s, 3), round(rel_s, 3)))
 
 
-def cylinder():
-    h = random.randint(4, 20) * 5
-    d = random.randint(4, 20) * 5
+def cylinder(h=random.randint(4, 20) * 5, d=random.randint(4, 20) * 5):
     print('Задание - Цилиндр с образующей, равной {} см, и главной диагональю, равной {} см.'
           .format(h, d))
 
