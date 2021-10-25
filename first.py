@@ -57,29 +57,63 @@ def trapeze():
 def pyramid():
     a = random.randint(10, 150)
     h = random.randint(10, 100)
-
     print('Правильная четырехугольная пирамида со стороной основания, равной {} см, и высотой, равной {} см.'
           .format(a, h))
-    pass
+
+    v = 1 / 3 * a ** 2 * h
+    abs_v = 1 / 3 * a * (2 * h + a)
+    rel_v = (abs_v / v) * 100
+    print('Обьем фигуры = {} +- {} см^3, относительная погрешность вычисления = {} %'
+          .format(v, abs_v, rel_v))
+
+    sup = math.sqrt(4 * h ** 2 + a ** 2)
+    s = 2 * a * sup + a ** 2
+    abs_s = 2 * sup + 2 * a ** 2 / sup + 2 * a + 8 * a * h / sup
+    rel_s = (abs_s / s) * 100
+    print('Площадь поверхности фигуры = {} +- {} см^2, относительная погрешность вычисления = {} %'
+          .format(s, abs_s, rel_s))
 
 
 def cone():
     h = random.randint(10, 50)
     r = random.randint(5, 50)
-
     print('Конус с высотой, равной {} см, и радиусом, равным {} см.'
           .format(h, r))
-    pass
+
+    v = 1 / 3 * math.pi * r ** 2 * h
+    abs_v = 1 / 3 * math.pi * r * (r + 2 * h)
+    rel_v = (abs_v / v) * 100
+    print('Обьем фигуры = {} +- {} см^3, относительная погрешность вычисления = {} %'
+          .format(v, abs_v, rel_v))
+
+    sup = math.sqrt(h ** 2 + r ** 2)
+    s = math.pi * r * (sup + r)
+    abs_s = math.pi * sup + math.pi * r ** 2 / sup + math.pi * h * r / sup
+    rel_s = (abs_s / s) * 100
+    print('Площадь поверхности фигуры = {} +- {} см^2, относительная погрешность вычисления = {} %'
+          .format(s, abs_s, rel_s))
 
 
 def parallelepiped():
     h = random.randint(10, 100)
     a = random.randint(10, 100)
-    d = random.randint(10, 100)
-
+    d = random.randint(a, 150)
     print('Прямоугольный параллелепипед с высотой {} см, стороной основания {} см и диагональю основания {} см.'
           .format(h, a, d))
-    pass
+
+    sup = math.sqrt(d ** 2 - a ** 2)
+
+    v = a * sup * h
+    abs_v = sup * h - a ** 2 / sup * h + a * d / sup * h + a * sup
+    rel_v = (abs_v / v) * 100
+    print('Обьем фигуры = {} +- {} см^3, относительная погрешность вычисления = {} %'
+          .format(v, abs_v, rel_v))
+
+    s = 2 * ((a + h) * sup + a * h)
+    abs_s = 2 * (sup - a ** 2 / sup - a * h / sup + h + (a + h) * d / sup + sup + a)
+    rel_s = (abs_s / s) * 100
+    print('Площадь поверхности фигуры = {} +- {} см^2, относительная погрешность вычисления = {} %'
+          .format(s, abs_s, rel_s))
 
 
 def cylinder():
@@ -105,7 +139,6 @@ def third_task():
     pass
 
 
-trapeze()
-pyramid()
-cone()
-parallelepiped()
+first_task()
+print('\n____________________\n')
+second_task()
