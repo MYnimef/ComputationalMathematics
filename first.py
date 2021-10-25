@@ -1,5 +1,6 @@
 import math
 import random
+from sympy import *
 
 
 def first_task():
@@ -136,9 +137,117 @@ def cylinder():
 
 
 def third_task():
-    pass
+    postfix = ''
+
+    """
+    postfix = ''
+    operators = []
+
+    for symbol in infix:
+        if symbol.isalpha():
+            postfix += symbol
+        elif symbol == '(':
+            operators.append(symbol)
+        elif symbol == ')':
+            while operators[-1] != '(':
+                postfix += operators.pop()
+            operators.pop()
+        elif symbol != ' ':
+            while operators and not(operators[-1] == '(') and priority(symbol) <= priority(operators[-1]):
+                postfix += operators.pop()
+            operators.append(symbol)
+
+    while operators:
+        postfix += operators.pop()
+    """
+
+    operand = 0
+    for i in range(0, 5):
+        sup = random.randint(1, 3)
+        while operand == sup:
+            sup = random.randint(1, 3)
+        operand = sup
+
+        if operand == 1:
+            postfix += 'x'
+        elif operand == 2:
+            postfix += 'y'
+        elif operand == 3:
+            postfix += 'z'
+
+        step = random.randint(0, 2)
+        if step == 1:
+            postfix += 'a' + '^'
+        elif step == 2:
+            postfix += 'b' + '^'
+
+        if i == 1 or i == 3 or i == 4:
+            operation = random.randint(1, 4)
+            if operation == 1:
+                postfix += '+'
+            elif operation == 2:
+                postfix += '-'
+            elif operation == 3:
+                postfix += '*'
+            elif operation == 4:
+                postfix += '/'
+
+        if i == 4:
+            operation = random.randint(1, 4)
+            if operation == 1:
+                postfix += '+'
+            elif operation == 2:
+                postfix += '-'
+            elif operation == 3:
+                postfix += '*'
+            elif operation == 4:
+                postfix += '/'
+
+    infix = get_infix(postfix)
+    print('Исходная функция = {}'
+          .format(infix))
+    infix = infix.replace('^', '**')
+
+    x, y, z, a, b = symbols('x y z a b')
+    denominator = random.randint(2, 5)
+    while denominator == 3:
+        denominator = random.randint(2, 5)
+    a = 1 / denominator
+    b = random.randint(2, 4)
+    print('Степени чисел a = {}, b = {}'.format(a, b))
+
+    dx = eval(str(diff(infix, x)))
+    dx_str = (str(dx)).replace('**', '^')
+    dy = eval(str(diff(infix, y)))
+    dy_str = (str(dy)).replace('**', '^')
+    dz = eval(str(diff(infix, z)))
+    dz_str = (str(dz)).replace('**', '^')
+    print('Абсолютная погрешность функции = ({}) * del1 + ({}) * del2 + ({}) * del3'
+          .format(dx_str, dy_str, dz_str))
+
+    dx = eval('{} / {}'.format(dx, infix))
+    dx_str = (str(dx)).replace('**', '^')
+    dy = eval('{} / {}'.format(dy, infix))
+    dy_str = (str(dy)).replace('**', '^')
+    dz = eval('{} / {}'.format(dz, infix))
+    dz_str = (str(dz)).replace('**', '^')
+    print('Относительная погрешность функции = ({}) * del1 + ({}) * del2 + ({}) * del3'
+          .format(dx_str, dy_str, dz_str))
 
 
-first_task()
-print('\n____________________\n')
-second_task()
+def get_infix(postfix):
+    stack = []
+    for i in range(len(postfix)):
+        if postfix[i].isalpha():
+            stack.append(postfix[i])
+        else:
+            operator1 = stack.pop()
+            operator2 = stack.pop()
+            stack.append("(" + operator2 + postfix[i] + operator1 + ")")
+    return stack.pop()
+
+
+def priority(x):
+    if x == '+' or x == '-':
+        return 1
+    return 2
