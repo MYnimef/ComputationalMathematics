@@ -41,8 +41,8 @@ def lagrange():
         drop = ''
         for j in n_arr:
             if i != j:
-                drop += '((x - ' + str(x_arr[j]) + ') / (' + str(x_arr[i]) + ' - ' + str(x_arr[j]) + ')) *'
-        p += str(y_arr[i]) + ' * ' + drop + ' 1 + '
+                drop += '((x-' + str(x_arr[j]) + ')/(' + str(x_arr[i]) + '-' + str(x_arr[j]) + '))*'
+        p += str(y_arr[i]) + '*' + drop + '1+'
     p += '0'
 
     p = str(simplify(p))
@@ -64,10 +64,10 @@ def newton():
             del_y.append(sup_y[j + 1] - sup_y[j])
         sup_y = del_y.copy()
 
-        p += ' + (' + str(del_y[0] / (math.factorial(i + 1) * (x_arr[i + 1] - x_arr[i]) ** (i + 1))) + ')'
+        p += '+((' + str(del_y[0]) + ')/(' + str(math.factorial(i + 1) * (x_arr[i + 1] - x_arr[i]) ** (i + 1)) + '))'
 
         for j in range(0, i + 1):
-            p += ' * (x - ' + str(x_arr[j]) + ')'
+            p += '*(x-' + str(x_arr[j]) + ')'
 
     p = str(simplify(p))
     p_str = p.replace('**', '^')
