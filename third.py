@@ -1,5 +1,4 @@
 import random
-
 from sympy import *
 
 
@@ -12,7 +11,6 @@ class RootFinder:
         self.fx = str(x ** 3 - k * x + l)
         self.dfx = str(diff(self.fx, x))
         self.d2fx = str(diff(self.dfx, x))
-
         self.eps = eps
 
         self.calculate()
