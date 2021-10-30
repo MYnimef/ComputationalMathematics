@@ -15,6 +15,8 @@ class RootFinder:
 
         self.eps = eps
 
+        self.calculate()
+
     def __f(self, x) -> float:
         return eval(self.fx, {'x': x})
 
@@ -38,9 +40,9 @@ class RootFinder:
         extreme2 = self.newton(0, 1e3)
 
         print('\nМетод касательных: ')
-        print(self.newton(-1e3, extreme1))
-        print(self.newton(extreme1, extreme2))
-        print(self.newton(extreme2, 1e3))
+        print('x1 = {}'.format(self.newton(-1e3, extreme1)))
+        print('x2 = {}'.format(self.newton(extreme1, extreme2)))
+        print('x3 = {}'.format(self.newton(extreme2, 1e3)))
 
     def secant(self, x0, x1):
         f = self.__f
@@ -52,34 +54,33 @@ class RootFinder:
         return x2
 
     def calculate_secant(self):
-        extreme1 = -self.newton(-1e3, 0)
-        extreme2 = self.newton(0, 1e3)
+        extreme1 = -self.secant(-1e3, 0)
+        extreme2 = self.secant(0, 1e3)
 
         print('\nМетод хорд: ')
-        print(self.secant(-1e3, extreme1))
-        print(self.secant(extreme1, extreme2))
-        print(self.secant(extreme2, 1e3))
+        print('x1 = {}'.format(self.secant(-1e3, extreme1)))
+        print('x2 = {}'.format(self.secant(extreme1, extreme2)))
+        print('x3 = {}'.format(self.secant(extreme2, 1e3)))
 
     def simple_iterations(self, a):
-        xn = pow(self.k * a - self.l, 1 / 3)
-        xn1 = xn + 1
+        k = self.k
+        l = self.l
+
+        xn = a
+        xn1 = pow(abs(k * xn - l), 1/3)
         while abs(xn1 - xn) > self.eps:
             xn = xn1
-            xn1 = pow(self.k * xn - self.l, 1 / 3)
+            xn1 = pow(abs(k * xn - l), 1/3)
         return xn1
 
     def calculate_simple_iterations(self):
         print('\nМетод простых итераций: ')
-        print(self.simple_iterations(-1e3))
-        print(self.simple_iterations(0))
-        print(self.simple_iterations(1e3))
+        print('x1 = {}'.format(self.simple_iterations(3)))
+        print('x2 = {}'.format(self.simple_iterations(-5)))
+        print('x3 = {}'.format(self.simple_iterations(-1e3)))
 
     def calculate(self):
         print('Исходное выражение {} = 0'.format(self.fx))
         self.calculate_newton()
         self.calculate_secant()
         self.calculate_simple_iterations()
-
-
-rt = RootFinder(20, 10)
-rt.calculate()

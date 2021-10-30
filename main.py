@@ -1,5 +1,6 @@
 import first
 import second
+from third import RootFinder
 
 if __name__ == '__main__':
     print('\nПервое занятие\n')
@@ -21,3 +22,6 @@ if __name__ == '__main__':
     print('\n____________________\n')
 
     print('\nТретье занятие\n')
+    RootFinder()
+
+    print('\nЧетвертое занятие\n')
