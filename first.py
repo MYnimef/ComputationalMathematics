@@ -251,3 +251,13 @@ def priority(x):
     if x == '+' or x == '-':
         return 1
     return 2
+
+
+if __name__ == '__main__':
+    print('\n____________________\n')
+    first_task()
+    print('\n____________________\n')
+    second_task()
+    print('\n____________________\n')
+    third_task()
+    print('\n____________________\n')
