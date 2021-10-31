@@ -3,7 +3,10 @@ from sympy import *
 
 
 class RootFinder:
-    def __init__(self, k=random.randint(20, 50) / 10, l=random.randint(1, 50) / 10, eps=1e-15):
+    def __init__(self, k=random.randint(20, 50) / 10, l=random.randint(1, 50) / 10, eps=1e-16):
+        self.__start(k, l, eps)
+
+    def __start(self, k=random.randint(20, 50) / 10, l=random.randint(1, 50) / 10, eps=1e-16):
         self.k = k
         self.l = l
 
@@ -12,8 +15,6 @@ class RootFinder:
         self.dfx = str(diff(self.fx, x))
         self.d2fx = str(diff(self.dfx, x))
         self.eps = eps
-
-        self.calculate()
 
     def __f(self, x) -> float:
         return eval(self.fx, {'x': x})
@@ -36,11 +37,7 @@ class RootFinder:
     def calculate_newton(self):
         extreme1 = -self.newton(-1e3, 0)
         extreme2 = self.newton(0, 1e3)
-
-        print('\nМетод касательных: ')
-        print('x1 = {}'.format(self.newton(-1e3, extreme1)))
-        print('x2 = {}'.format(self.newton(extreme1, extreme2)))
-        print('x3 = {}'.format(self.newton(extreme2, 1e3)))
+        return [self.newton(-1e3, extreme1), self.newton(extreme1, extreme2), self.newton(extreme2, 1e3)]
 
     def secant(self, x0, x1):
         f = self.__f
@@ -54,11 +51,7 @@ class RootFinder:
     def calculate_secant(self):
         extreme1 = -self.secant(-1e3, 0)
         extreme2 = self.secant(0, 1e3)
-
-        print('\nМетод хорд: ')
-        print('x1 = {}'.format(self.secant(-1e3, extreme1)))
-        print('x2 = {}'.format(self.secant(extreme1, extreme2)))
-        print('x3 = {}'.format(self.secant(extreme2, 1e3)))
+        return [self.secant(-1e3, extreme1), self.secant(extreme1, extreme2), self.secant(extreme2, 1e3)]
 
     def simple_iterations(self, a):
         k = self.k
@@ -72,13 +65,54 @@ class RootFinder:
         return xn1
 
     def calculate_simple_iterations(self):
-        print('\nМетод простых итераций: ')
-        print('x1 = {}'.format(self.simple_iterations(3)))
-        print('x2 = {}'.format(self.simple_iterations(-5)))
-        print('x3 = {}'.format(self.simple_iterations(-1e3)))
+        return [self.simple_iterations(3), self.simple_iterations(-5), self.simple_iterations(-1e3)]
+
+    @staticmethod
+    def print_res(x, name):
+        print('\n{}'.format(name))
+        for i in range(0, len(x)):
+            print('x{} = {}'.format(i + 1, x[i]))
 
     def calculate(self):
-        print('Исходное выражение {} = 0'.format(self.fx))
-        self.calculate_newton()
-        self.calculate_secant()
-        self.calculate_simple_iterations()
+        x = self.calculate_newton()
+        result = []
+        for i in range(0, len(x)):
+            flag = True
+            for j in range(0, len(result)):
+                num1 = int(x[i] * 1000)
+                num2 = int(result[j] * 1000)
+                if i != j and num1 == num2:
+                    flag = False
+                    break
+            if flag:
+                result.append(x[i])
+
+        if len(result) == 3:
+            print('Исходное выражение {} = 0'.format(self.fx).replace('**', '^'))
+            self.print_res(result, 'Корни уравнения:')
+        elif len(result) == 2:
+            sup = self.calculate_secant()
+            for i in sup:
+                flag = True
+                for j in x:
+                    if i == j:
+                        flag = False
+                if flag:
+                    result.append(i)
+                    print('Исходное выражение {} = 0'.format(self.fx).replace('**', '^'))
+                    self.print_res(result, 'Корни уравнения:')
+                    break
+        else:
+            self.__start()
+            self.calculate()
+
+    def calculate_all(self):
+        print('Исходное выражение {} = 0'.format(self.fx.replace('**', '^')))
+        self.print_res(self.calculate_newton(), 'Метод касательных: ')
+        self.print_res(self.calculate_secant(), 'Метод хорд:')
+        self.print_res(self.calculate_simple_iterations(), 'Метод простых итераций:')
+
+
+if __name__ == '__main__':
+    rt = RootFinder()
+    rt.calculate()

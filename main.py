@@ -1,5 +1,6 @@
 import first
 import second
+from fourth import IntegralCalculator
 from third import RootFinder
 
 if __name__ == '__main__':
@@ -22,6 +23,8 @@ if __name__ == '__main__':
     print('\n____________________\n')
 
     print('\nТретье занятие\n')
-    RootFinder()
+    rt = RootFinder()
+    rt.calculate()
 
     print('\nЧетвертое занятие\n')
+    ig = IntegralCalculator()

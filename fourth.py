@@ -57,4 +57,6 @@ class IntegralCalculator:
         self.calculate_parabola()
         self.calculate_gauss()
 
-IntegralCalculator(4, 2)
+
+if __name__ == '__main__':
+    ig = IntegralCalculator()

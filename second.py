@@ -74,3 +74,11 @@ def newton():
     print('Полином Ньютона P(x) = {}'.format(p_str))
 
     plot_graphics(length, x_arr, y_arr, p)
+
+
+if __name__ == '__main__':
+    print('\n____________________\n')
+    lagrange()
+    print('\n____________________\n')
+    newton()
+    print('\n____________________\n')
