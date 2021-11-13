@@ -3,10 +3,10 @@ from sympy import *
 
 
 class RootFinder:
-    def __init__(self, k=random.randint(20, 50) / 10, l=random.randint(1, 50) / 10, eps=1e-16):
+    def __init__(self, k=random.randint(20, 50) / 10, l=random.randint(1, 50) / 10, eps=1e-15):
         self.__start(k, l, eps)
 
-    def __start(self, k=random.randint(20, 50) / 10, l=random.randint(1, 50) / 10, eps=1e-16):
+    def __start(self, k=random.randint(20, 50) / 10, l=random.randint(1, 50) / 10, eps=1e-15):
         self.k = k
         self.l = l
 
@@ -115,4 +115,7 @@ class RootFinder:
 
 if __name__ == '__main__':
     rt = RootFinder()
+    # rt = RootFinder(2.5, 0.8)  # 8
+    # rt = RootFinder(3.8, 1.6)  # 6
+    # rt = RootFinder(3.9, 2.3)  # 10
     rt.calculate()

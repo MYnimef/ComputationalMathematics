@@ -10,10 +10,10 @@ class Interpolation:
     def __init__(self, x_arr: list = None, y_arr: list = None):
         if y_arr is None or x_arr is None:
             self.length = 5
-            n = range(0, self.length)
+            x_begin = (random.randint(0, 10) - 5)
             self.den = random.randint(0, 1)
-            self.x_arr = [i / pow(2, self.den) for i in n]
-            self.y_arr = [random.randint(0, self.length + i) * pow(-1, (random.randint(0, 1))) for i in n]
+            self.x_arr = [i / pow(2, self.den) for i in range(x_begin, self.length + x_begin)]
+            self.y_arr = [random.randint(0, self.length + i) * pow(-1, (random.randint(0, 1))) for i in range(0, self.length)]
         elif len(x_arr) != len(y_arr):
             raise Exception('Idiota')
         else:
@@ -108,5 +108,6 @@ if __name__ == '__main__':
     # interpolation = Interpolation([-1, -0.5, 0, 0.5], [1, -1, 2, 1]) # 10/3
     # interpolation = Interpolation([0, 0.5, 1, 1.5], [1, -1, 2, 1])  # 10/1
     # interpolation = Interpolation([-1, -0.5, 0, 0.5], [-1, -1, 2, -2])  # 11/3
+    # interpolation = Interpolation([0, 0.5, 1, 1.5], [2, 1, -1])  # 5/1
     interpolation.lagrange()
     interpolation.first_newton()

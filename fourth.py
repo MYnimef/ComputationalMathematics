@@ -59,4 +59,6 @@ class IntegralCalculator:
 
 
 if __name__ == '__main__':
-    ig = IntegralCalculator()
+    # ig = IntegralCalculator()
+    # ig = IntegralCalculator(2.6, 1.6)  # 8
+    ig = IntegralCalculator(2.2, 1.2)  # 6
