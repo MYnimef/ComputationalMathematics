@@ -1,3 +1,4 @@
+import math
 import random
 
 from sympy import *
@@ -5,10 +6,13 @@ from sympy import *
 
 class IntegralCalculator:
     def __init__(self, k=random.randint(20, 50) / 10, l=random.randint(1, 50) / 10):
+        self.k = k
+        self.l = l
+
         self.a = (k - l) / 2
         self.b = k + l
         x = symbols('x')
-        self.fx = (x + l) / (x**2 + x + k)
+        self.fx = (x + l) / (x ** 2 + x + k)
         self.n = [4, 6, 8]
 
         self.calculate()
@@ -79,8 +83,18 @@ class IntegralCalculator:
         self.calculate_parabola()
         self.calculate_gauss()
 
+    def accurate(self):
+        return self.__accurate_func(self.b) - self.__accurate_func(self.a)
+
+    def __accurate_func(self, x):
+        k = self.k
+        l = self.l
+        return 1 / 2 * math.log(x ** 2 + x + k) + (l - 1 / 2) / ((k - 1 / 4) ** (1 / 2)) * math.atan(
+            (x + 1 / 2) / ((k - 1 / 4) ** (1 / 2)))
+
 
 if __name__ == '__main__':
     ig = IntegralCalculator()
     # ig = IntegralCalculator(2.6, 1.6)  # 8
     # ig = IntegralCalculator(2.2, 1.2)  # 6
+    print('Точное значение = {}'.format(ig.accurate()))
