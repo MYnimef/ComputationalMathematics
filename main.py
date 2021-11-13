@@ -1,5 +1,5 @@
 import first
-import second
+from second import Interpolation
 from fourth import IntegralCalculator
 from third import RootFinder
 
@@ -16,11 +16,9 @@ if __name__ == '__main__':
 
     print('\nВторое занятие\n')
 
-    print('\n____________________\n')
-    second.lagrange()
-    print('\n____________________\n')
-    second.newton()
-    print('\n____________________\n')
+    interpolation = Interpolation()
+    interpolation.lagrange()
+    interpolation.first_newton()
 
     print('\nТретье занятие\n')
     rt = RootFinder()
