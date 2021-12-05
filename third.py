@@ -7,6 +7,7 @@ class RootFinder:
         self.__start(k, l, eps)
 
     def __start(self, k=random.randint(20, 50) / 10, l=random.randint(1, 50) / 10, eps=1e-15):
+        # K SHOULD BE BIGGER THAN L
         self.k = k
         self.l = l
 
@@ -35,9 +36,9 @@ class RootFinder:
         return xn1
 
     def calculate_newton(self):
-        extreme1 = -self.newton(-1e3, 0)
-        extreme2 = self.newton(0, 1e3)
-        return [self.newton(-1e3, extreme1), self.newton(extreme1, extreme2), self.newton(extreme2, 1e3)]
+        extreme1 = -self.newton(-1e2, 0)
+        extreme2 = self.newton(0, 1e2)
+        return [self.newton(-1e2, extreme1), self.newton(extreme1, extreme2), self.newton(extreme2, 1e2)]
 
     def secant(self, x0, x1):
         f = self.__f
@@ -49,9 +50,9 @@ class RootFinder:
         return x2
 
     def calculate_secant(self):
-        extreme1 = -self.secant(-1e3, 0)
-        extreme2 = self.secant(0, 1e3)
-        return [self.secant(-1e3, extreme1), self.secant(extreme1, extreme2), self.secant(extreme2, 1e3)]
+        extreme1 = -self.secant(-1e2, 0)
+        extreme2 = self.secant(0, 1e2)
+        return [self.secant(-1e2, extreme1), self.secant(extreme1, extreme2), self.secant(extreme2, 1e2)]
 
     def simple_iterations(self, a):
         k = self.k
@@ -114,7 +115,8 @@ class RootFinder:
 
 
 if __name__ == '__main__':
-    rt = RootFinder()
+    # rt = RootFinder()
+    rt = RootFinder(4.9, 2.3)
     # rt = RootFinder(2.5, 0.8)  # 8
     # rt = RootFinder(3.8, 1.6)  # 6
     # rt = RootFinder(3.9, 2.3)  # 10
