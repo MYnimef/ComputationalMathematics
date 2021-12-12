@@ -4,6 +4,7 @@ import random
 import numpy as np
 from sympy import *
 import matplotlib.pyplot as plt
+from scipy import interpolate as interp
 
 
 class Interpolation:
@@ -37,7 +38,9 @@ class Interpolation:
             y_new_arr.append(eval(p))
 
         plt.plot(x_new_arr, y_new_arr)
+        plt.plot(x_new_arr, interp.interp1d(self.x_arr, self.y_arr, kind='cubic')(x_new_arr))
         plt.plot(self.x_arr, self.y_arr, 'ro')
+        plt.legend(['Наша реализация', 'cubic', 'исходные точки'], loc='best')
         plt.show()
 
     def __simplify(self, p: str) -> str:
